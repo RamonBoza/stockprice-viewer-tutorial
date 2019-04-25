@@ -31,6 +31,15 @@ public class DbServiceResource {
                 .collect(Collectors.toList());
     }
 
+    @DeleteMapping("/{username}")
+    public List<Quote> delete(@PathVariable("username") String username) {
+
+        List<Quote> quotes = quotesRepository.findByUserName(username);
+        quotesRepository.deleteInBatch(quotes);
+
+        return quotesRepository.findByUserName(username);
+    }
+
     @PostMapping("/add")
     public List<String> add(@RequestBody final Quotes quotes) {
 
