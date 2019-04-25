@@ -21,6 +21,10 @@ public class DbServiceResource {
     @GetMapping("/{username}")
     public List<String> getQuotes(@PathVariable("username") final String username) {
 
+        return getQuotesByUsername(username);
+    }
+
+    private List<String> getQuotesByUsername(@PathVariable("username") String username) {
         return quotesRepository.findByUserName(username)
                 .stream()
                 .map(Quote::getQuote)
@@ -30,8 +34,11 @@ public class DbServiceResource {
     @PostMapping("/add")
     public List<String> add(@RequestBody final Quotes quotes) {
 
+        quotes.getQuotes()
+                .stream()
+                .map(quote -> new Quote(quotes.getUserName(), quote))
+                .forEach(quote -> quotesRepository.save(quote));
 
-
-        return null;
+        return getQuotesByUsername(quotes.getUserName());
     }
 }

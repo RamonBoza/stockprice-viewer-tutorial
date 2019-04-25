@@ -1,0 +1,6 @@
+CREATE TABLE quotes (
+    id   INTEGER      NOT NULL AUTO_INCREMENT,
+    user_name VARCHAR(128) NOT NULL,
+    quote  VARCHAR(128) NOT NULL,
+    PRIMARY KEY (id)
+);

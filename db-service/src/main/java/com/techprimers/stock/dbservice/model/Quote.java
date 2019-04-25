@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Quote {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -16,6 +16,14 @@ public class Quote {
 
     @Column(name = "quote")
     private String quote;
+
+    public Quote() {
+    }
+
+    public Quote(String userName, String quote) {
+        this.userName = userName;
+        this.quote = quote;
+    }
 
     public Integer getId() {
         return id;
